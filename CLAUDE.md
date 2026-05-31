@@ -19,7 +19,7 @@
   - **SHAP 2층위**: ① 전체 `model/shap_global_beeswarm.png`(거리_강남≫지하철거리>승하차>도심거리>POI…) ② 위치별 = 격자/`predict`의 top_factors(칸마다 다름).
   - **산출물**: `model/xgb_model.joblib` · `grid_250m.csv`(7,883칸·250m·정류소400m내) · `predict.py`(좌표→예측가+오차+SHAP+신뢰도) · `feature_extractor.py`(좌표→32피처 재현, QC 32/32 일치) · `error_band.json`(80% 구간 ×0.59~1.62) · `README.md`(인계).
   - **판단 결정**: Y=log1p · 결측=NaN+플래그 · 지역CV=자치구GroupKFold · 튜닝=RandomizedSearch · 격자=250m · 임의좌표의 버스승하차·공시지가=최근접 학습정류장 NN대체. 광고 인벤토리(2,601)는 쉘터라 마스터 11,250의 부분집합.
-- **다음(범위 밖/후속)**: 웹/REST는 다른 팀원 몫. 후속 옵션 = PPT용 격자 히트맵 지도·예측실측 산점도·도로망 제거판·100m 격자.
+- **다음(범위 밖/후속)**: 웹(지도 UI)은 팀원 몫 — 브리프 `web/README.md`(모드 A·격자 조회·API 불필요). 후속 옵션 = PPT용 격자 히트맵 지도·예측실측 산점도·도로망 제거판·100m 격자.
 
 ## 확정된 핵심 결정
 - **대상 도시: 서울** (세종은 폐기. `data/sejong/`는 참고용으로만 보존, 분석에 사용 안 함).
@@ -49,6 +49,7 @@
 - `pyproject.toml` · `uv.lock` · `.python-version` — uv 프로젝트 설정.
 - `scripts/` — 수집·조립·점검 + **모델링** 스크립트(`build_*_feature.py`·`build_model_table.py`·`gate_boarding.py`·`smoke_keys.py`·`assemble_and_check.py` / **`model_utils.py`·`train_eval.py`·`tune_xgb.py`·`ablation.py`·`shap_analyze.py`·`build_error_band.py`·`build_subway_master.py`·`build_grid.py`·`qc_extractor.py`**).
 - `model/` — ⭐ **산출물(인계)**: `xgb_model.joblib`·`xgb_best_params.json`·`error_band.json`·`grid_250m.csv`·`predict.py`·`feature_extractor.py`·`shap_global_*`·`README.md`(사용법·스키마·성능·한계·웹팀 의존). 온디맨드 예측은 `raw/소상공인 상가`·`raw/osm graphml`·`features/지하철_역마스터.csv`·`모델테이블.csv` 의존.
+- `web/` — 웹(지도 UI) **팀원 작업 영역**. 모드 A(격자 조회·백엔드 불필요). 브리프 `web/README.md`. ⚠️ `model/`·`data/`·`scripts/`는 읽기만(수정 금지).
 - `.env` — API 키 3종(커밋 금지). 모델링까지 완료 — 산출물·사용법은 `model/README.md`.
 
 ## 파이프라인 (계획서 순서)
