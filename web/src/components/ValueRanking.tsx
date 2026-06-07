@@ -12,8 +12,8 @@ export default function ValueRanking({ data, gu, selectedIdx, onSelect }: Props)
   const ranked = useMemo(
     () =>
       data.stops
-        .filter((s) => s.valuePct != null && (!gu || s.gu === gu))
-        .sort((a, b) => (b.valuePct as number) - (a.valuePct as number))
+        .filter((s) => s.costPerRider != null && (!gu || s.gu === gu))
+        .sort((a, b) => (a.costPerRider as number) - (b.costPerRider as number))
         .slice(0, 60),
     [data, gu],
   )
