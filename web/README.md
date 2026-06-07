@@ -120,6 +120,20 @@ npm run build      # 정적 빌드 → dist/ (Cloudflare Pages 등에 그대로 
 
 ---
 
+## 7. 배포 (Cloudflare Workers · `bus.sings.dev`)
+
+순수 정적 빌드라 백엔드 없이 Cloudflare Workers 정적 에셋으로 올린다. 설정은 `wrangler.jsonc` (Worker 이름 `bus-sings-dev`, 에셋 `./dist`, 커스텀 도메인 `bus.sings.dev`).
+
+```bash
+npx wrangler login   # 최초 1회만 (브라우저 OAuth)
+npm run deploy       # = npm run build && wrangler deploy
+```
+
+- `wrangler.jsonc`의 `routes`에 `custom_domain: true`로 잡혀 있어 **첫 배포 때 `bus.sings.dev`의 DNS·SSL이 자동 생성**된다(sings.dev 존이 같은 Cloudflare 계정에 있을 때).
+- 빌드는 **로컬에서** 돌고 결과 `dist/`만 업로드한다 — 빌드에 헤드리스 크롬·시스템 폰트 같은 특수 환경이 필요 없어 **CI/GitHub Actions 불필요**.
+
+---
+
 <details>
 <summary>원래 인계 브리프 (handoff brief)</summary>
 
