@@ -18,3 +18,6 @@ __pycache__/
 
 # --- 로그/임시 ---
 *.log
+
+# --- 데이터 캐시 (osmnx/Overpass OSM 응답 등; 재생성 가능, 커밋 제외) ---
+/cache/
