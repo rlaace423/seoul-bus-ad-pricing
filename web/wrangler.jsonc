@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "bus-sings-dev",
+  "compatibility_date": "2026-06-07",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    { "pattern": "bus.sings.dev", "custom_domain": true }
+  ]
+}
